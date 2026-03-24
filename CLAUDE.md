@@ -27,7 +27,7 @@ The workflow starts when the user sends a bare ticket ID — for example `#3` or
   Pass in the prompt:
   - ticket `title`, `description`, and `comments`
   - list of test IDs already in memory (so the subagent avoids duplicates)
-  - instruction to write the file to `tests/e2e/generated.spec.ts`
+  - instruction to write the file to `agent_tests/e2e/generated.spec.ts`
 
   Wait for the subagent to complete before proceeding.
 
@@ -40,12 +40,12 @@ The workflow starts when the user sends a bare ticket ID — for example `#3` or
 1. **Fetch the ticket** — run `get_ticket` with the provided ticket ID. Read `title`, `description`, and all `comments`.
 2. **Check memory** — read `memory/test_cases.md` (if it exists). Extract any test IDs already recorded for this ticket to pass to the subagent as `existing_test_ids`.
 3. **Guard: subagent exists** — verify `.claude/agents/e2e_test_generator.md` exists. If it does not, stop immediately and tell the user: "The e2e_test_generator subagent is not configured. Please create `.claude/agents/e2e_test_generator.md` from the provided template."
-4. **Invoke subagent** — use the Agent tool (`subagent_type: "e2e_test_generator"`) with the ticket context and `existing_test_ids`. The subagent writes `tests/e2e/generated.spec.ts`.
-5. **Review generated tests** — read `tests/e2e/generated.spec.ts`. Confirm it contains at least 5 `test(` declarations.
+4. **Invoke subagent** — use the Agent tool (`subagent_type: "e2e_test_generator"`) with the ticket context and `existing_test_ids`. The subagent writes `agent_tests/e2e/generated.spec.ts`.
+5. **Review generated tests** — read `agent_tests/e2e/generated.spec.ts`. Confirm it contains at least 5 `test(` declarations.
 6. **Update memory** — append the newly generated test IDs and titles to `memory/test_cases.md` under the ticket's section.
 7. **Present results** — show the summary table (see Output format). End with the review prompt.
 8. **Wait for human review** — do NOT call `post_comment`. Wait for the user's response.
-9. **Iterate on feedback** — if the user requests changes, re-invoke the subagent with updated instructions and refresh `tests/e2e/generated.spec.ts`. Update memory. Re-present results.
+9. **Iterate on feedback** — if the user requests changes, re-invoke the subagent with updated instructions and refresh `agent_tests/e2e/generated.spec.ts`. Update memory. Re-present results.
 10. **Publish gate** — when the user's message contains the word **"publish"**, call `post_comment` with a markdown summary of the generated tests, then report the result.
 
 ## Output format
@@ -55,7 +55,7 @@ After step 7, present:
 ```
 ## Generated E2E Tests — [Ticket Title] (#[ticket_id])
 
-File: tests/e2e/generated.spec.ts
+File: agent_tests/e2e/generated.spec.ts
 Tests generated: [N]
 
 | # | Test name |
@@ -75,7 +75,7 @@ Then add:
 
 - **Publish gate (critical):** Do NOT call `post_comment` under any circumstance unless the user's message contains the exact word **"publish"**.
 - **No duplicates:** Always pass `existing_test_ids` from memory to the subagent. Never generate test cases whose IDs are already recorded in memory.
-- **Delegate, don't write:** Do not write `tests/e2e/generated.spec.ts` yourself — always delegate to the subagent.
+- **Delegate, don't write:** Do not write `agent_tests/e2e/generated.spec.ts` yourself — always delegate to the subagent.
 - **Subagent guard:** If `.claude/agents/e2e_test_generator.md` does not exist, stop and prompt the user to create it (step 3 above).
 - Do not answer general questions or perform tasks outside this workflow.
 
