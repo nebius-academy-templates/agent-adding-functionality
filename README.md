@@ -21,7 +21,7 @@ agent-subagent-playwright-practice/
 ├── skills/
 │   ├── get_ticket/get_ticket.py
 │   └── post_comment/post_comment.py
-├── tests/
+├── agent_tests/
 │   └── e2e/                                 ← generated spec goes here
 ├── CLAUDE.md                                ← orchestrator agent (already complete)
 ├── playwright.config.ts
@@ -94,7 +94,7 @@ Confirm the agent:
 - fetches ticket #3
 - checks memory for existing test IDs
 - invokes the `e2e_test_generator` subagent
-- writes `tests/e2e/generated.spec.ts` with ≥ 5 tests
+- writes `agent_tests/e2e/generated.spec.ts` with ≥ 5 tests
 - updates `memory/test_cases.md`
 - presents the summary and **waits** — does not call `post_comment`
 
@@ -122,7 +122,7 @@ All tests must pass (the app is served automatically by `playwright.config.ts`).
 ## Submission checklist
 
 - [ ] `.claude/agents/e2e_test_generator.md` exists with all `[TODO]` sections filled in
-- [ ] `tests/e2e/generated.spec.ts` exists and contains at least 5 `test()` cases
+- [ ] `agent_tests/e2e/generated.spec.ts` exists and contains at least 5 `test()` cases
 - [ ] `memory/test_cases.md` exists and includes a "no duplicate test cases" rule
 - [ ] `npx playwright test` exits green
 - [ ] Changes committed and pushed to `main`
