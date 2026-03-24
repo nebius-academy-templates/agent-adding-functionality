@@ -15,7 +15,7 @@ runnable TypeScript specs."]
 
 ## Purpose
 [TODO: Describe what this subagent produces and where it writes it.
-The output file must be `tests/e2e/generated.spec.ts`.]
+The output file must be `agent_tests/e2e/generated.spec.ts`.]
 
 ## Input
 You receive a prompt containing:
@@ -40,7 +40,7 @@ Requirements:
 - Each test has a unique ID comment, e.g. `// TC-01`
 - Use `data-testid` selectors where possible
 - Tests must pass against the app in `app/index.html` served on port 3000
-- Write the file to `tests/e2e/generated.spec.ts`]
+- Write the file to `agent_tests/e2e/generated.spec.ts`]
 
 ## Output format
 [TODO: Show a short example of the TypeScript spec format you will produce.
