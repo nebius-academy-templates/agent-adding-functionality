@@ -11,7 +11,7 @@ You'll also create a memory file that prevents duplicate test cases across sessi
 6. Run the tests
 7. Submit your task
 
-### Button text: Let's go!
+Let's go!
 
 ## 1. Set up your environment
 
