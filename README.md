@@ -127,7 +127,6 @@ publish
 ```
 Confirm that it posts a summary comment via `post_comment`. 
 
-You read the README! Extremely rare. We salute you.🥂
 
 ## 6. Run the tests
 
@@ -138,6 +137,8 @@ npx playwright test
 ```
 
 All tests must pass. The app is served automatically by `playwright.config.ts`.
+
+...you read the README! Extremely rare. We salute you.🥂
 
 ## 7. Submit your task
 
