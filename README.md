@@ -128,6 +128,8 @@ publish
 
 Confirm that it posts a summary comment via `post_comment`.
 
+# You read the README! Extremely rare. We salute you.🥂
+
 ## 6. Run the tests
 
 Run:
